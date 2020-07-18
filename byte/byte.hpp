@@ -9,6 +9,7 @@ public:
 	bool pull(int position);
 	bool operator[](int);
 	int conwert();
+	void clear();
 	~byte();
 }; //End class byte
 #endif //!BYTE_HPP

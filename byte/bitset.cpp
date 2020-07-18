@@ -3,13 +3,14 @@
 BitSet::BitSet(int size)
 {
     if(size>0){
-        int Size=size/8;
+        Size=size/8;
         int result = size%8;
         if(double(result)>double(Size)) Size+1;
             base = new byte[Size];
+        for(int i=0; i<=Size; i++){
+            base[i].clear();
+        }
         free = (unsigned char)(8-result)%8;
-
-        
     }
     else
     {
@@ -17,6 +18,23 @@ BitSet::BitSet(int size)
     }
     
 }//Constructor BitSet
+bool BitSet::operator[](int position){
+    if(position >= 0 && (position/8)<= Size){
+        int pos = position/8;
+        int size = position%8;
+        return base[pos][size];
+    }
+    return false;
+}
+
+void BitSet::insert(int position, bool value ){
+    if(position >= 0 && (position/8)<= Size){
+        int pos = position/8;
+        int size = position%8;
+        base[pos].push(size, value);
+     }
+}
+
 int BitSet::freebyte(){
     return free;
 }
