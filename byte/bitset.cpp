@@ -38,7 +38,18 @@ void BitSet::insert(int position, bool value ){
 int BitSet::freebyte(){
     return free;
 }
+
 BitSet::~BitSet()
 {
     delete[] base;
 }//Destruktor BitSet
+
+std::ostream& operator<<(std::ostream& out,  BitSet & bitset){
+    for(int i=0; i<bitset.Size; i++)
+            out << bitset.base[i];
+
+    for(int i=0; i<8-bitset.free; i++)
+            out <<bitset.base[bitset.Size][i];
+    
+    return out;
+}

@@ -1,6 +1,5 @@
 #ifndef BITSET_HPP
 #define BITSET_HPP
-#include <iostream>
 #include "byte.hpp"
 class BitSet
 {
@@ -12,6 +11,7 @@ public:
 	int freebyte(); 
 	bool operator[](int position);
 	void insert(int position, bool value );
+	friend std::ostream& operator<<(std::ostream& out,  BitSet & bit); 
 	~BitSet();
 }; //End class BitSet
 #endif //!BITSET_HPP

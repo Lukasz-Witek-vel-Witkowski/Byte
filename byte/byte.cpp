@@ -24,3 +24,9 @@ void byte::clear(){
 byte::~byte()
 {
 }//Destruktor byte
+ std::ostream& operator<<(std::ostream& out, byte & bit){
+    for(int i=0; i<8; i++){
+        out << bit[i];
+    }
+    return out;
+ }
