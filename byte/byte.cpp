@@ -25,8 +25,15 @@ byte::~byte()
 {
 }//Destruktor byte
  std::ostream& operator<<(std::ostream& out, byte & bit){
+    return bit.getOut(out);
+ }
+ std::fstream& operator<<(std::fstream& out, byte& bit){
+    return bit.getOut(out);
+ }
+template <class T>
+T& byte::getOut(T& out){
     for(int i=0; i<8; i++){
-        out << bit[i];
+        out << pull(i);
     }
     return out;
- }
+}

@@ -45,11 +45,18 @@ BitSet::~BitSet()
 }//Destruktor BitSet
 
 std::ostream& operator<<(std::ostream& out,  BitSet & bitset){
-    for(int i=0; i<bitset.Size; i++)
-            out << bitset.base[i];
+    return bitset.getOut(out);
+}
+std::fstream& operator<<(std::fstream& out, 	BitSet& bitset){
+    return bitset.getOut(out);
+}
+template<class T>
+T& BitSet::getOut(T& out){
+    for(int i=0; i<Size; i++)
+            out << base[i];
 
-    for(int i=0; i<8-bitset.free; i++)
-            out <<bitset.base[bitset.Size][i];
+    for(int i=0; i<8-free; i++)
+            out <<base[Size][i];
     
     return out;
 }
