@@ -18,6 +18,11 @@ BitSet::BitSet(int size)
     }
     
 }//Constructor BitSet
+
+byte& BitSet::pull(int position){
+    return base[position];
+}
+
 bool BitSet::operator[](int position){
     if(position >= 0 && (position/8)<= Size){
         int pos = position/8;
@@ -35,6 +40,27 @@ void BitSet::insert(int position, bool value ){
      }
 }
 
+long long BitSet::convert(){
+  long long data = 0;
+  if(Size>8) {
+    for(int i=0; i<8; i++){
+        data = data << 0x08;
+        data |= pull(i).conwert()<<0x00;
+    }
+  }
+  else{
+    for(int i=0; i<Size; i++){
+        data = data << 0x08;
+        data |= pull(i).conwert()<<0x00;
+     //   std::cout<<"\nvar "<<i<<"\t"<<std::bitset<8>(pull(i).conwert())<<" - "<<(int)pull(i).conwert(); 
+    }
+  }
+  //  std::cout<<"\n";
+
+   //std::cout<<"\n temp "<<data<<" bitowo : "<<std::bitset<64>(data)<<"\n";
+    return data;
+}
+
 int BitSet::freebyte(){
     return free;
 }
@@ -43,6 +69,11 @@ BitSet::~BitSet()
 {
     delete[] base;
 }//Destruktor BitSet
+
+int BitSet::size(){
+    return Size;
+}
+
 
 std::ostream& operator<<(std::ostream& out,  BitSet & bitset){
     return bitset.getOut(out);
@@ -55,8 +86,10 @@ T& BitSet::getOut(T& out){
     for(int i=0; i<Size; i++)
             out << base[i];
 
-    for(int i=0; i<8-free; i++)
-            out <<base[Size][i];
+    if(free != 0){
+        for(int i=7-free; i>=0; i--)
+                out <<base[Size][i];
+    }
     
     return out;
 }

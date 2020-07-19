@@ -14,7 +14,7 @@ public:
 	bool operator[](int);
 	friend std::ostream& operator<<(std::ostream& out, byte& bit); 
 	friend std::fstream& operator<<(std::fstream& out, byte& bit);
-	int conwert();
+	unsigned char conwert();
 	void clear();
 	~byte();
 }; //End class byte
