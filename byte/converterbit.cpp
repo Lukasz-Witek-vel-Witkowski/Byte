@@ -12,6 +12,15 @@ short ConventerBit::toShort(BitSet bitset){
 long long ConventerBit::toLong(BitSet bitset){
     return bitset.convert();
 }
+void ConventerBit::toInt(BitSet& bitset, int& value){
+    value = bitset.convert();
+}
+void ConventerBit::toShort(BitSet& bitset, short& value){
+    value = bitset.convert();
+}
+void ConventerBit::toLong(BitSet& bitset, long long& value){
+    value = bitset.convert();
+}
 void ConventerBit::fromInt(BitSet& bit,int value){
   from(bit, value);
 }
@@ -36,5 +45,5 @@ void ConventerBit::from(BitSet& bit ,T value){
          bit.insert(Size-i,value&(1<<(Size-i)));
         }
     }
-  // bit.updateFree();
+  bit.updateFree();
 }

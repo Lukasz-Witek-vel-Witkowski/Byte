@@ -12,7 +12,8 @@ int main()
     int size = 10;
     BitSet bit(size);
     std::cout << "Free = " << bit.freebyte() << "\n";
-    bit.insert(9, true);
+    std::cout<< "Size = "<<bit.size() << "\n";
+    bit.insert(7, true);
     bit.insert(6, true);
     bit.insert(5, true);
     bit.insert(4, true);
@@ -20,7 +21,23 @@ int main()
     bit.insert(2, true);
     bit.insert(1, true);
     bit.insert(0, true);
-    ConventerBit con;
+    bit.insert(3, false);
+    bit.insert(4, false);
+    std::cout<<bit<<"\n";
+  
+    bit.insertTopFree(0,true);
+    bit.insertTopFree(1,true);
+    bit.insertTopFree(2,true);
+    bit.insertTopFree(3,true);
+    bit.insertTopFree(4,true);
+    bit.insertTopFree(5,true);
+    bit.insertTopFree(3,false);
+    bit.insertTopFree(4,false);
+    for(int i=0; i<=6; i++){
+        std::cout<<i <<"\t"<<bit.getToFree(i)<<"\n";
+    }
+  
+   /* ConventerBit con;
     std::cout << "Start\n";
     int tr = 255;
     std::cout<<"value "<<254<<"\t"<<std::bitset<sizeof(int)*8>(tr);
@@ -33,6 +50,6 @@ int main()
     short test = 639;
     con.fromShort(bit, test);
     std::cout << "from\t" << test << "\t" << bit;
-    std::cout << "\nKoniec programu\n";
+    std::cout << "\nKoniec programu\n";*/
     return 0;
 }

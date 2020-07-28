@@ -7,9 +7,9 @@ byte::byte()
 
 void byte::push(int position, bool value){
     if(value)
-        tab |= 1<<position;
+        tab |= (1<<position);
     else
-        tab &= ~1<<position;    
+        tab &= ~(1<<position);    
 }
 bool byte::pull(int position){
     return tab&(1<<position);

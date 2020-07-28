@@ -5,7 +5,8 @@ BitSet::BitSet(int size)
     if(size>0){
         Size=size/8;
         int result = size%8;
-        if(double(result)>double(Size)) Size+1;
+        if(result>0) Size++;
+            std::cout<<"\n"<<Size<<"\n";
             base = new byte[Size];
         for(int i=0; i<=Size; i++){
             base[i].clear();
@@ -69,11 +70,11 @@ std::fstream& operator<<(std::fstream& out, 	BitSet& bitset){
 template<class T>
 T& BitSet::getOut(T& out){
     if(free != 0){
-        for(int i=7; i>=0; i--)
-                out <<base[Size][i];
+        for(int i=8-free; i>=0; i--) 
+            out <<base[Size-1][i];
     }
     
-    for(int i=Size-1; i>=0; i--)
+    for(int i=Size-2; i>=0; i--)
             out << base[i];
   
     return out;
@@ -88,9 +89,11 @@ void BitSet::setSize(int value){
     }
 }
 void BitSet::updateFree(){
-    for(int j =Size-1; j>0; j--){
-        if(1==getbit(j)){
-            free = Size -j;
+    std::cout<<"size "<<Size<<"\n";
+    for(int j =(Size*8)-1; j>=0; j--){
+        std::cout<<j<<"\tbit "<<getbit(j)<<"\n";
+        if(true==getbit(j)){
+            free = (Size*8)-(j+1);
             break;
         } 
     }
@@ -101,5 +104,14 @@ bool BitSet::getbit(int position){
         int size = position%8;
         return base[pos][size];
     }
+    return false;
+}
+void BitSet::insertTopFree(int position, bool value){
+    if(position>=0&& position<free)
+        base[Size-1].push((8-free)+position, value);
+}
+bool BitSet::getToFree(int position){
+    if(position>=0&& position<free)
+      return base[Size-1].pull((8-free)+position);
     return false;
 }

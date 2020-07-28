@@ -15,6 +15,8 @@ protected:
 public:
 	BitSet(int size);
 	int freebyte(); 
+	void insertTopFree(int position, bool value);
+	bool getToFree(int position);
 	bool operator[](int position);
 	void insert(int position, bool value );
 	long long convert();
